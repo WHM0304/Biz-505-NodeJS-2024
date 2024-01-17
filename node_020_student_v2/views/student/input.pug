@@ -1,0 +1,10 @@
+extends ../layout
+
+block content
+    link(rel="stylesheet", href="/css/input.css")
+    h1 학생정보입력
+    form.insert
+        input(placeholder = "학번을 입력하세요" name = "st_num")
+        input(placeholder = "이름을 입력하세요" name = "st_name")
+        input(placeholder = "학과를 입력하세요" name = "st_dept")
+        button(method ="POST") 전송

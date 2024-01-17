@@ -13,7 +13,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/insert", async (req, res) => {
-  res.render("student/input");
+  res.render("student/input.pug");
 });
 
 // router 객체를 다른곳에서 import 할수 있도록 export 하기

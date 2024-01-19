@@ -79,13 +79,10 @@ router.get("/:b_isbn/update", (req, res) => {
 router.post("/:b_isbn/update", (req, res) => {
   const b_isbn = req.body.isbn;
   const b_publisher = req.body.publisher;
-  const b_ = req.body.author;
-  const b_t = req.body.title;
+  const b_author = req.body.author;
+  const b_pubdate = req.body.b_pubdate;
+  const b_title = req.body.title;
   const b_price = req.body.price;
   const b_discount = `${req.body.price * 0.9}`;
-  const b_is = req.body.isbn;
-  const b_title = req.body.title;
-  const b_autr = req.body.author;
-  const b_author = req.body.author;
 });
 export default router;

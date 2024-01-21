@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const b_author = inputs[2];
   const b_publisher = inputs[3];
   const b_price = inputs[4];
-  const b_discount = inputs[5];
   const error_divs = document.querySelectorAll("div.error");
 
   btn_save.addEventListener("click", () => {

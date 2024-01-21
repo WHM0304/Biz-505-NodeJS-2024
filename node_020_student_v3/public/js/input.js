@@ -76,23 +76,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // alert("전송");
     if (!st_num.value) {
-      error_divs[ST_INDEX.ST_NUM].innerHTML = "* 학번은 반드시 입력하세요";
+      error_divs[ST_INDEX.ST_NUM].innerHTML =
+        "* 학번은 반드시 입력하세요";
       st_num.select();
       return false;
     } else {
       const bRedYes = st_num_valid(st_num);
-      if (bRedYes) {
+      if (!bRedYes) {
         st_num.select();
         return false;
       }
     }
     if (!st_name.value) {
-      error_divs[ST_INDEX.ST_NAME].innerHTML = "* 학생의 이름은 반드시 입력해야 합니다";
+      error_divs[ST_INDEX.ST_NAME].innerHTML =
+        "* 학생의 이름은 반드시 입력해야 합니다";
       st_name.select();
       return false;
     }
     if (!st_dept.value) {
-      error_divs[ST_INDEX.ST_DEPT].innerHTML = "* 학과는 반드시 입력하세요";
+      error_divs[ST_INDEX.ST_DEPT].innerHTML =
+        "* 학과는 반드시 입력하세요";
       st_dept.select();
       return false;
     }
@@ -113,7 +116,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = event.target;
     const value = target.value;
     if (!value) {
-      error_divs[ST_INDEX.ST_NUM].innerText = "* 학번을 입력해 주세요";
+      error_divs[ST_INDEX.ST_NUM].innerText =
+        "* 학번을 입력해 주세요";
       // alert("학번은 반드시 입력하세요");
       target.select();
       return false;
@@ -134,7 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const target = event.target;
     const value = target.value;
     if (!value) {
-      error_divs[ST_INDEX.ST_NAME].innerText = " * 이름은 반드시 입력해야 합니다";
+      error_divs[ST_INDEX.ST_NAME].innerText =
+        " * 이름은 반드시 입력해야 합니다";
       st_name.select();
       return false;
     }

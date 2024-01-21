@@ -44,7 +44,9 @@ router.post("/insert", (req, res) => {
   // DB에 insert 하기 위해 배열type 으로 변환
   // const params = [req.body.st_num, req.body.st_name, req.body.st_dept]
   const params = [st_num, st_name, st_dept];
-  const sql = " INSERT INTO tbl_student(st_num, st_name, st_dept) " + " VALUES( ?,?,? )";
+  const sql =
+    " INSERT INTO tbl_student(st_num, st_name, st_dept) " +
+    " VALUES( ?,?,? )";
 
   dbConn.query(sql, params, (err, result) => {
     if (err) {
@@ -120,24 +122,38 @@ router.get("/:st_num/update", (req, res) => {
 });
 
 router.post("/:st_num/update", (req, res) => {
+  const st_num = req.params.st_num;
   const st_name = req.body.st_name;
   const st_dept = req.body.st_dept;
   const st_grade = req.body.st_grade;
   const st_tel = req.body.st_tel;
   const st_addr = req.body.st_addr;
-  const st_num = req.params.st_num;
 
-  const params = [st_name, st_dept, st_grade, st_tel, st_addr, st_num];
+  const params = [
+    st_name,
+    st_dept,
+    st_grade,
+    st_tel,
+    st_addr,
+    st_num,
+  ];
   const sql =
-    " UPDATE tbl_student " + " SET st_name = ?, " + " st_dept = ?, " + " st_grade = ?, " + " st_tel = ?, " + " st_addr = ? " + " WHERE st_num = ? ";
+    " UPDATE tbl_student " +
+    " SET st_name = ?, " +
+    "   st_dept = ?, " +
+    "   st_grade = ?, " +
+    "   st_tel = ?, " +
+    "   st_addr = ? " +
+    " WHERE st_num = ? ";
 
   dbConn.query(sql, params, (err, result) => {
     if (err) {
       return res.json(err);
     } else {
-      res.redirect(`/student/${st_num}/detail`);
+      return res.redirect(`/student/${st_num}/detail`);
     }
   });
 });
+
 // router 객체를 다른곳에서 import 할수 있도록 export 하기
 export default router;

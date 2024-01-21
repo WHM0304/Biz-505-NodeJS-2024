@@ -18,9 +18,7 @@ block content
             input(placeholder ="가격" name="price" value= `${BTD ? BTD.b_price : ""}`)
             div.error.b_price
             input(placeholder ="메모") 
-
-
-        button.save 저장
+            button.save(type=`${BTD ? "submit" : "button"}`) 저장
     div.add 
         a(href="#") 새로작성
     div.list 

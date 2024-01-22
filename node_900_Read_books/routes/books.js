@@ -50,17 +50,8 @@ router.post("/add", (req, res) => {
 
   // DB에 insert 하기 위해 배열type 으로 변환
   // const params = [req.body.st_num, req.body.st_name, req.body.st_dept]
-  const params = [
-    b_isbn,
-    b_title,
-    b_author,
-    b_publisher,
-    b_price,
-    b_discount,
-  ];
-  const sql =
-    " INSERT INTO tbl_books(b_isbn, b_title, b_author, b_publisher, b_price,b_discount) " +
-    " VALUES( ?,?,?,?,?,? )";
+  const params = [b_isbn, b_title, b_author, b_publisher, b_price, b_discount];
+  const sql = " INSERT INTO tbl_books(b_isbn, b_title, b_author, b_publisher, b_price,b_discount) " + " VALUES( ?,?,?,?,?,? )";
 
   dbConn.query(sql, params, (err, result) => {
     if (err) {
@@ -93,6 +84,23 @@ router.post("/:b_isbn/update", (req, res) => {
   const b_title = req.body.title;
   const b_price = req.body.price;
   const b_discount = `${req.body.price * 0.9}`;
+  const params = [b_isbn, b_publisher, b_author, b_pubdate, b_title, b_price, b_discount];
+  const sql =
+    " UPDATE tbl_books " +
+    " SET b_isbn = ?, " +
+    "   b_publisher = ?, " +
+    "   b_author = ?, " +
+    "   b_pubdate = ?, " +
+    "   b_title = ? " +
+    "   b_price = ? " +
+    " WHERE b_isbn = ? ";
+  dbConn.query(sql, params, (err, result) => {
+    if (err) {
+      return res.json(err);
+    } else {
+      return res.redirect(`/books/${b_isbn}/detail`);
+    }
+  });
 });
 
 router.get("/:b_isbn/delete", (req, res) => {
@@ -102,7 +110,7 @@ router.get("/:b_isbn/delete", (req, res) => {
     if (err) {
       return res.json(err);
     } else {
-      return res.redirect("/books/");
+      return res.redirect("/books/list");
     }
   });
 });

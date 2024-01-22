@@ -4,8 +4,7 @@ block content
     link(rel="stylesheet", href="/css/add.css")
     if !BTD
         script(src = "/js/add.js")
-        form.books(method="POST")
-        
+        form.books(method="POST")      
             input(placeholder ="isbn", name="isbn",  value= `${BTD ? BTD.b_isbn : ""}` )
             div.error.b_is
             input(placeholder ="출판사" name="publisher" value= `${BTD? BTD.b_publisher:""}`)    

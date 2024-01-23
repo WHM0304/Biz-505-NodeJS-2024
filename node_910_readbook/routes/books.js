@@ -16,7 +16,7 @@ DB.init().then((connection) => {
 });
 console.log("dbConn", dbConn);
 
-// 비동기 방식 init() 비동기방식
+// 비동기 방식 init() 동기방식
 // const dbConn = DB.init();
 
 router.get("/", (req, res) => {
@@ -64,6 +64,16 @@ router.post("/insert", (req, res) => {
     .catch((err) => {
       return res.render("db_error", err);
     });
+});
+
+router.get("/:isbn/detail", (req, res) => {
+  const isbn = req.params.isbn;
+
+  const params = [isbn];
+  const sql = " SELECT * FROM tbl_books WHERE isbn = ? ";
+  dbConn.query(sql, params).then((rows) => {
+    return res.render("books/detail", { BTD: rows[0] });
+  });
 });
 
 export default router;

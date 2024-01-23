@@ -1,0 +1,19 @@
+.head {
+  padding: 20px;
+  background-color: darkcyan;
+  text-align: center;
+  color: white;
+}
+.detail {
+  padding: 10px;
+  margin: 10px auto;
+  display: flex;
+  strong {
+    width: 15%;
+    text-align: right;
+    margin-right: 15px;
+  }
+  span {
+    width: 60%;
+  }
+}

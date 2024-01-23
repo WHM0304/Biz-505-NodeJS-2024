@@ -1,9 +1,10 @@
 extends ../books/main
 
 block book_content
+    script(src="/js/detail.js")
     link(rel="stylesheet", href="/css/books/detail.css")
     h1.head 자세히보기
-    each books in BTD
+    each books in book
         div.detail
             strong ISBN
             span= books.isbn
@@ -25,3 +26,7 @@ block book_content
         div.detail
             strong 일자
             span= books.pubdate
+        div.btn_box
+            input(type="button" , value = "리스트로") 
+            input(type="button", value = "수정")
+            input(type="button", value = "삭제")

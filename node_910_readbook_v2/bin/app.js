@@ -16,12 +16,19 @@ import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 
+// 모델을 import 하기
+import DB from "../models/index.js";
+
 // import router modules
 import indexRouter from "../routes/index.js";
 import usersRouter from "../routes/users.js";
-import booksRouter from "../routes/books.js";
+// import booksRouter from "../routes/books.js";
+
 // create express framework
 const app = express();
+
+// 인덱스js에 있는 Se퀄.sync함수 실행
+DB.Sequelize.sync({ force: true });
 
 // helmet security module
 app.use(helmet());
@@ -44,7 +51,7 @@ app.use(express.static(path.join("public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 // /books/* 으로 요청이 들어오면 booksRouter 로 전달하라
-app.use("/books", booksRouter);
+// app.use("/books", booksRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -125,7 +125,6 @@ GRANT ALL PRIVILEGES ON *.* TO 'whm0304'@'localhost';
 -- 기존에 부여된 권한을 회수하기
 REVOKE ALL PRIVILEGES ON *.* FROM 'whm0304'@'localhost';
 
-USE bookdb2;
-DROP TABLE tbl_books;
+
 
 

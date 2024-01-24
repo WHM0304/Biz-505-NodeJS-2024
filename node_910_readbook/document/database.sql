@@ -127,5 +127,5 @@ REVOKE ALL PRIVILEGES ON *.* FROM 'whm0304'@'localhost';
 
 USE bookdb2;
 DROP TABLE tbl_books;
-
+DESC tbl_books;
 

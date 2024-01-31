@@ -1,28 +1,30 @@
 /**
-* express generator ES6+ Template
-* @author : callor@callor.com
-* @since : 2020-12-10
-* @update : 2024-01-19
-* @see : nodejs + express 프로젝트에서 ES6+ 문법을 사용하기 위한 template
-*/
+ * express generator ES6+ Template
+ * @author : callor@callor.com
+ * @since : 2020-12-10
+ * @update : 2024-01-19
+ * @see : nodejs + express 프로젝트에서 ES6+ 문법을 사용하기 위한 template
+ */
 
 // essential modules
-import express from 'express';
-import createError from 'http-errors';
-import path from 'path';
-import helmet from 'helmet';
+import express from "express";
+import createError from "http-errors";
+import path from "path";
+import helmet from "helmet";
+// session 도구 import
+import session from "express-session";
 
-// 3rd party lib modules  
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-
+// 3rd party lib modules
+import cookieParser from "cookie-parser";
+import logger from "morgan";
 
 // MySQL Sequelize
-import DB from '../models/index.js';
+import DB from "../models/index.js";
 
 // import router modules
-import indexRouter from '../routes/index.js';
-import usersRouter from '../routes/users.js';
+import indexRouter from "../routes/index.js";
+import usersRouter from "../routes/users.js";
+import iolistRouter from "../routes/iolist.js";
 
 // create express framework
 const app = express();
@@ -40,21 +42,46 @@ DB.sequelize.sync({ force: false }).then((dbConn) => {
 app.disable("x-powered-by");
 
 // view engine setup
-app.set('views', path.join('views'));
-app.set('view engine', 'pug');
-
+app.set("views", path.join("views"));
+app.set("view engine", "pug");
 
 // middleWare enable
-app.use(logger('dev'));
+app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join("public")));
+// session을 사용하기 위한 설정
+// cookieParser() 설정 이후에 위치
+app.use(
+  session({
+    key: "whm0304", // 식별자, 브라우저에 저장될 cookie 이름
+    secret: "whm0304@naver.com", // SessionID 암호화용 키
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60, // 유효시간
+    },
+  })
+);
+// 로그인을 하지 않아도 될 곳(회원인증)
+app.use("/users", usersRouter);
 
+/**
+ *  모든요청 http://localhost:3000/*  로 요청한 것들(공통적으로 적용되는것들)
+ * 어떤 특정 요청에 대한 routing 을 실행하는 것이 아니다
+ * 모든요청에 대하여 공통으로 어떤명령을 실행하고 싶을때
+ * 사용하는 router 이다
+ * 이 router 코드의 끝에는 반드시 next() 함수를 실행하 주어야 한다.
+ * 그렇지 않으면 다른 router 들이 전혀 실행되지 않는다.ㄴ
+ */
+app.use((req, res, next) => {
+  res.locals = req.session;
+  // next 를 안해주면 밑에있는 모든것들이 작동이 안됨
+  next();
+});
 // router link enable, link connection
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
+app.use("/", indexRouter);
+app.use("/iolist", iolistRouter);
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404));
@@ -64,11 +91,11 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+  res.locals.error = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render("error");
 });
 
 export default app;

@@ -60,8 +60,16 @@ router.get("/:username/check", async (req, res) => {
     return res.json({ MESSAGE: "NOT FOUND" });
   }
 });
+
+const LOGIN_MASSAGE = {
+  USER_NOT: "사용자 ID 없음",
+  PASS_WRONG: "비밀번호 오류",
+  NEED_LOGIN: "로그인 필요",
+};
+
 router.get("/login", (req, res) => {
-  return res.render("users/login");
+  const message = req.query.fail;
+  return res.render("users/login", { NEED: message });
 });
 
 /**
@@ -75,12 +83,26 @@ router.post("/login", async (req, res) => {
   const password = req.body.m_password;
   const result = await USER.findByPk(username);
   if (!result) {
-    return res.json({ MESSAGE: "USER NOT FOUND" });
+    return res.redirect(`/users/login/?fail=${LOGIN_MASSAGE.USER_NOT}`);
+    // return res.json({ MESSAGE: "USER NOT FOUND" });
   } else if (result.m_username === username && result.m_password !== password) {
-    return res.json({ MESSAGE: "PASSWORD WRONG" });
+    // return res.json({ MESSAGE: "PASSWORD WRONG" });
+    return res.redirect(`/users/login?fail=${LOGIN_MASSAGE.PASS_WRONG}`);
   } else if (result.m_username === username && result.m_password === password) {
-    return res.json({ MESSAGE: "LOGIN OK" });
+    // return res.json({ MESSAGE: "LOGIN OK" });
+    /**
+     * DB 에서 가져온 사용자정보(result에 담김)를
+     * Server 의 세션영역에 user 라는 이름으로 보관하라
+     * 그리고 Session ID 를 발행하라
+     */
+    req.session.user = result;
+    return res.redirect("/");
   }
+});
+
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
 });
 
 export default router;

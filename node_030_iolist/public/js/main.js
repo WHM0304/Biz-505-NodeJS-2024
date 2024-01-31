@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (navText === NAV_TEXT.회원가입) {
         url += "users/join";
       } else if (navText === NAV_TEXT.로그인) {
-        url += "user/login";
+        url += "users/login";
       }
       document.location.replace(url);
     }

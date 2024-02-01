@@ -1,8 +1,17 @@
 import express from "express";
 const router = express.Router();
 
+// DB 추가하기
+import DB from "../models/index.js";
+const IOLIST = DB.models.tbl_iolist;
+
 router.get("/", async (req, res) => {
-  return res.render("iolist/list");
+  try {
+    const rows = await IOLIST.findAll();
+    res.render("iolist/list", { IOLIST: rows });
+  } catch (error) {
+    return res.json(error);
+  }
 });
 
 router.get("/insert", (req, res) => {

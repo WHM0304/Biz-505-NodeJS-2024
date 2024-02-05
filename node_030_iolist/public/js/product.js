@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (target.tagName === "TD") {
       const tr = target.closest("TR");
       const p_code = tr.dataset.pcode;
-      document.location.replace(`/products/${p_code}/detail1`);
+      document.location.replace(`/products/${p_code}/detail`);
     }
   });
 

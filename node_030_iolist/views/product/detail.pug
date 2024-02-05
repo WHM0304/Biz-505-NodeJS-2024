@@ -3,7 +3,8 @@ extends ../layout
 block content
     
     div.detail
-        h3 #{PRODUCT.p_name} 상품 자세히 보기
+        h3 #{PRODUCT.p_name} 
+        a(href=`/products/${PRODUCT.p_code}/detail1`) 상품 자세히 보기
         p=PRODUCT.p_code
         p=PRODUCT.p_item
     table.detail.iolist

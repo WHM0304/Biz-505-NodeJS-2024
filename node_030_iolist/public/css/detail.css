@@ -44,3 +44,10 @@ img {
   width: 150px;
   margin: 10px;
 }
+
+div a {
+  display: inline-block;
+  background-color: yellow;
+  padding: 1rem;
+  margin: 10px auto;
+}

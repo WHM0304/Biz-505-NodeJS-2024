@@ -10,9 +10,16 @@ table.products {
 }
 
 div.btn_box {
+  padding: 10px;
   display: flex;
-  justify-content: end;
   margin: 10px auto;
+  justify-content: end;
+  div {
+    width: 50%;
+  }
+  input {
+    padding: 0.4rem;
+  }
 
   /* border: 1px solid black; */
 }

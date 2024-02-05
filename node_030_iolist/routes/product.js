@@ -1,5 +1,6 @@
 import express from "express";
 import DB from "../models/index.js";
+import { json } from "sequelize";
 const router = express.Router();
 
 const PRODUCTS = DB.models.tbl_products;
@@ -37,4 +38,9 @@ router.post("/insert", async (req, res) => {
   res.json(req.body);
 });
 
+router.get("/:pcode/update", async (req, res) => {
+  const pcode = req.params.pcode;
+  const row = await PRODUCTS.findByPk(pcode);
+  return res.render("product/update", { PRODUCT: row });
+});
 export default router;

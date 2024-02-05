@@ -1,6 +1,7 @@
 div.contain {
   margin: 10px auto;
   width: 80%;
+
   h1 {
     margin: 10px 0;
     border: 1px solid blue;
@@ -12,19 +13,34 @@ div.body {
   display: flex;
 
   div.detail {
-    display: flex;
+    width: 100%;
+    margin: 10px auto;
+
     div {
-      border: 1px solid black;
+      display: flex;
+      span {
+        flex: 1;
+        padding: 0.5rem;
+      }
+      strong {
+        margin: 10px 0;
+      }
     }
   }
 }
+
 div.btn_box {
   display: flex;
+
   button {
     flex: 1;
+    padding: 16px 14px;
+    margin: 10px 5px;
   }
 }
 
 img {
-  width: 100px;
+  display: inline-block;
+  width: 150px;
+  margin: 10px;
 }

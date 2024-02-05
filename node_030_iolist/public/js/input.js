@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (target.innerHTML === "입력") {
       form_box.submit();
     } else if (target.innerHTML === "취소") {
-      alert("취소");
+      document.location.replace("/products");
     }
   });
 });

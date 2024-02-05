@@ -2,14 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const pro_table = document.querySelector("table.products");
   const btn_box = document.querySelector("div.btn_box");
   const input = document.querySelector("input.list");
-  // pro_table.addEventListener("click", (e) => {
-  //   const target = e.target;
-  //   if (target.tagName === "TD") {
-  //     const tr = target.closest("TR");
-  //     const p_code = tr.dataset.pcode;
-  //     document.location.replace(`/products/${p_code}/detail`);
-  //   }
-  // });
+  pro_table.addEventListener("click", (e) => {
+    const target = e.target;
+    if (target.tagName === "TD") {
+      const tr = target.closest("TR");
+      const p_code = tr.dataset.pcode;
+      document.location.replace(`/products/${p_code}/detail1`);
+    }
+  });
 
   btn_box.addEventListener("click", (e) => {
     const target = e.target;

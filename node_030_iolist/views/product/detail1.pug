@@ -1,0 +1,32 @@
+extends ../layout
+
+block content
+    link(rel="stylesheet", href="/css/detail.css")
+    script(src="/js/detail.js")
+
+    div.contain
+        h1 #{PRODUCT.p_name}
+        div.body
+            img(src="/images/image_01.jpg", alt="")
+            div.detail
+                div
+                    span 상품코드
+                    span #{PRODUCT.p_code}
+                div
+                    span 상품이름
+                    span #{PRODUCT.p_name}
+                div
+                    span 품목
+                    span 
+                div
+                    span 규격
+                    span 
+                div
+                    span 매입단가
+                    span #{PRODUCT.p_iprice} 
+                div
+                    span 매출단가
+                    span #{PRODUCT.p_oprice}
+            div.btn_box
+                button 수정
+                button 삭제

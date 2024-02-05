@@ -1,0 +1,18 @@
+h1 {
+  text-align: center;
+}
+
+table.products {
+  width: 100%;
+  tr {
+    text-align: left;
+  }
+}
+
+div.btn_box {
+  display: flex;
+  justify-content: end;
+  margin: 10px auto;
+
+  /* border: 1px solid black; */
+}

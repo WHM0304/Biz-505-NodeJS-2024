@@ -1,0 +1,53 @@
+div.contain {
+  margin: 10px auto;
+  width: 80%;
+
+  h1 {
+    margin: 10px 0;
+    border: 1px solid blue;
+    width: 40%;
+  }
+}
+
+div.body {
+  display: flex;
+
+  div.detail {
+    width: 100%;
+    margin: 10px auto;
+
+    div {
+      display: flex;
+      span {
+        flex: 1;
+        padding: 0.5rem;
+      }
+      strong {
+        margin: 10px 0;
+      }
+    }
+  }
+}
+
+div.btn_box {
+  display: flex;
+
+  button {
+    flex: 1;
+    padding: 16px 14px;
+    margin: 10px 5px;
+  }
+}
+
+img {
+  display: inline-block;
+  width: 150px;
+  margin: 10px;
+}
+
+div a {
+  display: inline-block;
+  background-color: yellow;
+  padding: 1rem;
+  margin: 10px auto;
+}

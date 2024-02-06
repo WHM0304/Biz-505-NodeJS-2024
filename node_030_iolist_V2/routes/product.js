@@ -19,6 +19,14 @@ router.get("/", async (req, res) => {
   // return res.json(rows);
 });
 
+router.get("/insert", (req, res) => {
+  return res.render("product/input");
+});
+
+router.post("/insert", (req, res) => {
+  return res.json(req.body);
+});
+
 router.get("/:pcode/detail", async (req, res) => {
   const pcode = req.params.pcode;
   const row = await PRODUCTS.findByPk(pcode, { include: { model: IOLIST, as: "IOS", include: { model: DEPTS, as: "IO_거래처" } } });
@@ -31,39 +39,4 @@ router.get("/:pcode/detail1", async (req, res) => {
   return res.render("product/detail1", { PRODUCT: row });
 });
 
-router.get("/insert", async (req, res) => {
-  return res.render("product/input");
-});
-router.post("/insert", async (req, res) => {
-  const product_data = req.body;
-  const p_code = req.body.p_code;
-  try {
-    await PRODUCTS.create(product_data, { where: { p_code: p_code } });
-    return res.redirect(`/products/${p_code}/detail1`);
-  } catch (error) {}
-});
-
-router.get("/:pcode/update", async (req, res) => {
-  const pcode = req.params.pcode;
-  const row = await PRODUCTS.findByPk(pcode);
-  return res.render("product/update", { PRODUCT: row });
-});
-
-router.post("/:pcode/update", async (req, res) => {
-  const pcode = req.params.pcode;
-  const data = req.body;
-  try {
-    await PRODUCTS.update(data, { where: { p_code: pcode } });
-    return res.redirect(`/products/${pcode}/detail1`);
-  } catch (error) {}
-});
-
-router.get("/:pcode/delete", async (req, res) => {
-  const pcode = req.params.pcode;
-  const rows = await PRODUCTS.findAll({ limit: 10, order: [["p_code", "ASC"]] });
-  try {
-    await PRODUCTS.destroy({ where: { p_code: pcode } });
-    return res.render("product/list", { PRODUCTS: rows });
-  } catch (error) {}
-});
 export default router;

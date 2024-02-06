@@ -1,6 +1,6 @@
 import express from "express";
 import DB from "../models/index.js";
-import { json } from "sequelize";
+import { upLoad } from "../modules/file_upload.js";
 const router = express.Router();
 
 const PRODUCTS = DB.models.tbl_products;
@@ -23,8 +23,9 @@ router.get("/insert", (req, res) => {
   return res.render("product/input");
 });
 
-router.post("/insert", (req, res) => {
-  return res.json(req.body);
+router.post("/insert", upLoad.single("p_image"), (req, res) => {
+  const file = req.file;
+  return res.json({ body: req.body, file });
 });
 
 router.get("/:pcode/detail", async (req, res) => {

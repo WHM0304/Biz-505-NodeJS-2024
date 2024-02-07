@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 document.addEventListener("DOMContentLoaded", () => {
   const btn_insert = document.querySelector("#btn_insert");
   btn_insert?.addEventListener("click", () => {
@@ -84,4 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
       input_image.files = dataTransfer.files;
     }
   });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn_search = document.querySelector("#btn_search");
+  const p_search = document.querySelector("#p_search");
+  btn_search?.addEventListener("click", () => {});
 });

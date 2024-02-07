@@ -1,6 +1,9 @@
 import express from "express";
 import DB from "../models/index.js";
 import { upLoad } from "../modules/file_upload.js";
+
+// sequelize 를 사용할때 추가로 제공되는 확장 연산자
+import { Op } from "sequelize";
 const router = express.Router();
 
 const PRODUCTS = DB.models.tbl_products;
@@ -8,16 +11,19 @@ const IOLIST = DB.models.tbl_iolist;
 const DEPTS = DB.models.tbl_depts;
 
 router.get("/", async (req, res) => {
-  try {
-    const params = req.header(?p_search);
-    const rows = await PRODUCTS.findAll({ order: [["p_code", "DESC"]] });
-    return res.json(params);
-    // return res.render("product/list", { PRODUCTS: rows });
-    // return res.json(rows);
-  } catch (error) {
-    return res.json(error);
-  }
-  // return res.json(rows);
+  const p_search = req.query.p_search || "";
+  const sort = req.query.sort || "p_code";
+  const order = req.query.order || "ASC";
+
+  const rows = await PRODUCTS.findAll({
+    where: {
+      [Op.or]: [{ p_name: { [Op.like]: `%${p_search}%` } }, { p_code: `${p_search}` }],
+
+      // 나란히 조건문을 주어지면 and 연산
+    },
+    order: [[sort, order]],
+  });
+  return res.render("product/list", { PRODUCTS: rows, p_search });
 });
 
 router.get("/insert", (req, res) => {

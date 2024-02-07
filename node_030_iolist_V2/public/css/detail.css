@@ -1,0 +1,10 @@
+table.detail {
+  width: 70%;
+  margin: 10px auto;
+  tr {
+    font-size: 1rem;
+  }
+  td {
+    margin: 10px 0;
+  }
+}

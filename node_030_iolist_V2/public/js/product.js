@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const TH_ITEMS = {
+    상품코드: "p_code",
+    상품이름: "p_name",
+    품목: "p_item",
+    규격: "p_std",
+    매입단가: "p_iprice",
+    매출단가: "p_oprice",
+  };
+  // href : 현재 화면이 열릴때 서버에 요청한 주소창의 값들
+  // href 값의 일부를 추출하거나, 값을 가공하기 위하여 사용
+  const url = new URL(document.location.href);
+  const sort = url.searchParams.get("sort");
+  const order = url.searchParams.get("order");
+
   const pro_table = document.querySelector("table.products");
 
   /**
@@ -19,7 +33,39 @@ document.addEventListener("DOMContentLoaded", () => {
       const p_code = tr.dataset.pcode;
       document.location.replace(`/products/${p_code}/detail`);
     }
+    // 현재 click 된 요소가 th 이거나 th 의 자손이면
+    else if (target.tagName === "TH" || target.closest("TH")) {
+      const text = target.innerText || target.closest("TH").innerText;
+
+      const sortColumn = TH_ITEMS[text.trim()];
+      // alert(sortColumn);
+
+      // url 중에서 searchParams(또는 queryString) 들만 추출하기
+      url.searchParams.set("order", order === "ASC" ? "DESC" : "ASC");
+
+      // 주소창의 sort 선택요소와 클릭한 선택요소가 다르면
+      // 무조건 ASC 로 초기화 하여라
+      sort != sortColumn && url.searchParams.set("order", "ASC");
+
+      // sortColumn 이 null 이 아닌경우만 sort 변수를 세팅
+      // null safe 코드
+      sortColumn && url.searchParams.set("sort", sortColumn);
+      document.location.replace(`/products?${url.searchParams.toString()}`);
+      // let sort = "p_code";
+      // if (text === "상품코드") {
+      //   sort = "p_code";
+      // } else if (text === "상품이름") {
+      //   sort = "p_name";
+      // }
+    } // end if
   });
+  // "span.p_code"
+  // DOMContentLoaded event 가 발생할때마다 실행
+  // 화면이 새로고침 될때마다 실행
+  const span_sort = document.querySelector(`span.${sort}`);
+  const icon = span_sort.querySelector("i.arrow");
+  span_sort.classList.add("sort");
+  icon.classList.add(order === "ASC" ? "up" : "down");
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -85,10 +131,4 @@ document.addEventListener("DOMContentLoaded", () => {
       input_image.files = dataTransfer.files;
     }
   });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const btn_search = document.querySelector("#btn_search");
-  const p_search = document.querySelector("#p_search");
-  btn_search?.addEventListener("click", () => {});
 });

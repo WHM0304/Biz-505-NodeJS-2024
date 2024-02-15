@@ -13,6 +13,10 @@ export default class tbl_memo extends Model {
           type: DataTypes.STRING(25),
           allowNull: false,
         },
+        m_title: {
+          type: DataTypes.STRING(50),
+          allowNull: false,
+        },
         m_date: {
           type: DataTypes.STRING(10),
           allowNull: false,

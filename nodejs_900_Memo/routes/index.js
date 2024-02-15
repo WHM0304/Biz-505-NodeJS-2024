@@ -23,9 +23,14 @@ router.post("/insert", upLoad.single("m_image"), async (req, res) => {
   const MEMODATA = await MEMO.findAll();
   const today = moment().format("YYYY-MM-DD");
   const time = moment().format("hh:mm");
-  const m_iamge = req.file.filename;
+  if (req.file) {
+    const m_iamge = req.file.filename;
+    req.body.m_image = m_iamge;
+  } else {
+    req.body.m_image = null;
+  }
   req.body.m_seq = 0;
-  req.body.m_image = m_iamge;
+
   req.body.m_date = today;
   req.body.m_time = time;
   req.body.m_author = "whm0304@naver.com";

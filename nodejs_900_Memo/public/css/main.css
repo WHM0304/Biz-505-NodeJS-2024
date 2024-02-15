@@ -37,6 +37,7 @@ div.body {
 div.input_box {
   width: 60%;
   margin: 10px auto;
+  display: flex;
   input {
     padding: 10px;
     margin-left: 10px;
@@ -54,4 +55,7 @@ div.list {
     border: 1px solid black;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   }
+}
+form.form_box {
+  display: flex;
 }

@@ -9,7 +9,7 @@ block content
         input(type="button", value = "삭제",)
         input(type="button", value= "리스트")
     table.table_list
-        img(src=`/uploads/${item.m_image}`,width="200px")
+        img(src=`${item.m_image ?`/uploads/${item.m_image}`:"/images/noImage.svg"}` ,width="80px")
         tr
             th 번호
             th 작성일자

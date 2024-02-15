@@ -14,6 +14,6 @@ block content
       if row
         each item in row
           div.list(data-m_seq = item.m_seq)
-            img(src=`/uploads/${item.m_image}`,width="80px")
+            img(src=`${item.m_image ?`/uploads/${item.m_image}`:"/images/noImage.svg"}` ,width="80px")
             p=item.m_memo
           

@@ -27,18 +27,22 @@ document.addEventListener("DOMContentLoaded", () => {
   img_add?.addEventListener("click", () => {
     input_img.click();
   });
+  input_img?.addEventListener("change", imagePreView);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  const table = document.querySelector("table.list");
-  table?.addEventListener("click", (e) => {
+  const div_inline = document.querySelector("div.inline");
+  const div_list = document.querySelector("div.list");
+  div_inline?.addEventListener("click", (e) => {
     const target = e.target;
-    if (target.tagName === "TD") {
-      const tr = target.closest("TR");
-      const m_seq = tr.dataset.m_seq;
-      // alert(m_seq);
-      // document.location.replace(`/products/${m_seq}/detail`);
+    if (target.tagName === "P") {
+      const div = target.closest("DIV");
+      const m_seq = div.dataset.m_seq;
       document.location.replace(`/${m_seq}/detail`);
+    } else if (target.tagName === "IMG") {
+      const div = target.closest("DIV");
+      const m_seq = div.dataset.m_seq;
+      document.location.href = `/${m_seq}/detail`;
     }
   });
 });

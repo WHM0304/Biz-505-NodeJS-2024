@@ -10,5 +10,6 @@ block content
             input(type="text",name= "m_memo", placeholder="내용을 입력해주세요", value=`${data ? data.m_memo : ""}`)
             img.img_add(src=`/uploads/${data? data.m_image : ""}`, width = "100px",height ="100px", alt="추가아이콘") 
             input(type="file" , name="m_image",accept="image/*", id="m_image")
-        div
+        div.btn_con
             input(type="submit",value="저장")
+            input(type="button", value="리스트")

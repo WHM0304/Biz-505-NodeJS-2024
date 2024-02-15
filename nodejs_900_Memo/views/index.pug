@@ -6,15 +6,14 @@ block content
   header 
     h1 오늘은 내 생의 가장 젊은 날
   div.input_box
-    input(type="date",value=`${today}`)
-    input(type="time",value=`${time}`)
+    input(type="date",value=`${today}`,readonly)
+    input(type="text",value=`${time}`,readonly)
     input(type="button",value ="새로작성")
   div.inline
-    table.list
+    table
       if row
         each item in row
-          div.list2
+          div.list(data-m_seq = item.m_seq)
             img(src=`/uploads/${item.m_image}`,width="80px")
-            tr(data-m_seq = item.m_seq)#tr
-              td=item.m_memo
-            
+            p=item.m_memo
+          

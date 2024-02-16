@@ -8,6 +8,7 @@ export default class tbl_memos extends Model {
           type: DataTypes.BIGINT,
           allowNull: false,
           primaryKey: true,
+          autoIncrement: true,
         },
         m_author: {
           type: DataTypes.STRING(25),

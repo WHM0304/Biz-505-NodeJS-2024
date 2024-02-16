@@ -11,3 +11,8 @@
 ## 날짜 시간을 사용하기 위하여 moment 설치하기
 
 - `npm install moment`
+
+## 파일업로드를 위한 multer 설치하기
+
+- `npm install multer`
+- `npm install uuid`

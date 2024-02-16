@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100vh;
+}
+
+body {
+  height: 100%;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header,
+footer,
+section.main {
+  width: 60%;
+  margin: 10px auto;
+}
+
+header {
+  margin-top: 30px;
+  border: 1px solid #ddd;
+  padding: 0.7rem;
+  font-weight: bold;
+}
+footer {
+  text-align: center;
+  background-color: rgb(166, 166, 221);
+  color: white;
+  padding: 0.3rem;
+}

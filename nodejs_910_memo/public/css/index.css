@@ -57,3 +57,21 @@ form.input {
     margin: 3px 0;
   }
 }
+
+input.update {
+  background-color: green;
+  color: black;
+  border: none;
+  outline: none;
+}
+
+@media screen and (max-width: 800px) {
+  footer,
+  header,
+  section.main {
+    width: 95%;
+  }
+  section.main {
+    flex-direction: column;
+  }
+}

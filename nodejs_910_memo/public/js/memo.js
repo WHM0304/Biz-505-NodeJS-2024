@@ -1,10 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
   const date_form = document.querySelector("form.date");
   const input_form = document.querySelector("form.input");
+
   const btn_save = document.querySelector("input.btn_save");
   const btn_new = document.querySelector("input.btn_new");
+
+  // 화면의 input tag 들 전체
   const toDate = date_form.querySelector("input.todate");
   const toTime = date_form.querySelector("input.totime");
+  const toSubject = input_form.querySelector("input.tosubject");
+  const toMemo = input_form.querySelector("input.tomemo");
 
   const memo_box = document.querySelector("ul.memo");
 
@@ -42,18 +47,33 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch(`/${seq}/get`);
       const json = await res.json();
       console.log(json);
+
+      toDate.value = json.m_date;
+      toTime.value = json.m_time;
+      toSubject.value = json.m_subject;
+      toMemo.value = json.m_memo;
+      // btn_save 는 input tag 를 사용한 button 이므로 value 속성을
+      // 변경하면 화면에 보이는 text 가 변경된다
+      btn_save.value = "수정";
+      btn_save.classList.add("update");
+
+      // form.input 에 action 을 새롭게 지정하여
+      // 데이터 update 를 할수 있도록 한다.
+      // input_form.action = `/update/${json.m_seq}`;
+      input_form.action = `/?seq=${json.m_seq}`;
     }
   });
 
   btn_new.addEventListener("click", async () => {
-    try {
-      const response = await fetch("/get_new_date");
-      const json = await response.json();
-      toDate.value = json.toDate;
-      toTime.value = json.toTime;
-    } catch (error) {
-      alert("서버 통신오류");
-    }
+    location.reload();
+    // try {
+    //   const response = await fetch("/get_new_date");
+    //   const json = await response.json();
+    //   toDate.value = json.toDate;
+    //   toTime.value = json.toTime;
+    // } catch (error) {
+    //   alert("서버 통신오류");
+    // }
   });
 
   btn_save?.addEventListener("click", () => {

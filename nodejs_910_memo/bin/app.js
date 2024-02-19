@@ -29,6 +29,30 @@ const app = express();
 // helmet security module
 app.use(helmet());
 
+/**
+ * img-src 정책
+ * URL.createObjectURL() 함수를 사용하여
+ * 가상으로 생성된 이미지를 img tag 의 src(소스)로
+ * 사용할수 있도록 정책 설정하기
+ */
+const cspDirective = {
+  directives: {
+    // 서버에 있는 녀석만 허용하겠다
+    defaultSrc: ["'self'"],
+
+    "img-src": ["'self'", "blob:", "data:"],
+    // 위아래 똑같은 코드
+    // imgsrc: ["'self'", "blob:", "data:"],
+    // 폰트어썸에있는 페이지를 허가한다
+    "script-src": ["'self'", "'unsafe-inline'", "https://fontawesome.com/"],
+    "style-src": ["'self'", "'unsafe-inline'", "https://fontawesome.com/"],
+  },
+};
+//https://fontawesome.com/
+
+// helmet 을 통해 막혀있는 정책중 csp 를 일부 완화하기
+app.use(helmet.contentSecurityPolicy(cspDirective));
+
 // MySQL DB 연결
 // 주의!!! force 를 true 로 하면 기존의 Table 을 모두 DROP 한 후 재생성 한다
 DB.sequelize.sync({ force: false }).then((dbConn) => {

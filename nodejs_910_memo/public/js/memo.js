@@ -4,14 +4,33 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const btn_save = document.querySelector("input.btn_save");
   const btn_new = document.querySelector("input.btn_new");
+  const btn_delete = document.querySelector("input.btn_delete");
 
   // 화면의 input tag 들 전체
   const toDate = date_form.querySelector("input.todate");
   const toTime = date_form.querySelector("input.totime");
   const toSubject = input_form.querySelector("input.tosubject");
   const toMemo = input_form.querySelector("input.tomemo");
+  const toImage = input_form.querySelector("input.toImage");
+  const memo_iamge = input_form.querySelector("img.memo.image");
 
   const memo_box = document.querySelector("ul.memo");
+
+  memo_iamge.addEventListener("click", () => {
+    toImage.click();
+  });
+
+  toImage.addEventListener("change", (e) => {
+    // 파일 열기에서 선택한 파일
+    const imageFile = e.target.files[0];
+    // URL.createObjectURL() 또는 webkitURL.createObjectURL() 함수중에
+    // 하나를 사용하여..
+    // 업로드한 이미지를 가상의 이미지객체로 변환하여 화면에 미리보기를 구현하라
+    // 이 함수는 CSP 정책에 따라 사용이 제한된다
+    // 이 함수를 사용하려면 WAS 에서 CSP 정책을 일부 풀어줘야 한다
+    const imageURL = (window.URL || webkitURL).createObjectURL(imageFile);
+    memo_iamge.src = imageURL;
+  });
 
   /**
    * 한개의 메모를 클릭하면 각 메모의 seq 값을 알고 싶다
@@ -34,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
    *    3-4. classList 에 list 가 포함되어 있지 않다면 target은 img 이거나 span 이다
    *    3-5. target.closest("LI") 를 실행하여 부모 LI tag 로 부터 dataset.seq 값을 getter 한다.
    */
-  memo_box.addEventListener("click", async (e) => {
+  memo_box?.addEventListener("click", async (e) => {
     const target = e.target;
     const classList = target.classList;
     if (classList.contains("memo")) {
@@ -61,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 데이터 update 를 할수 있도록 한다.
       // input_form.action = `/update/${json.m_seq}`;
       input_form.action = `/?seq=${json.m_seq}`;
+      btn_delete.type = "button";
     }
   });
 

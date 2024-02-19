@@ -37,6 +37,12 @@ router.post("/", upLoad.single("m_image"), async (req, res) => {
 
 //
 
+router.get("/:seq/get", async (req, res) => {
+  const seq = req.params.seq;
+  const row = await MEMOS.findByPk(seq);
+  return res.json(row);
+});
+
 //
 
 router.get("/get_new_date", async (req, res) => {

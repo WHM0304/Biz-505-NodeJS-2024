@@ -31,4 +31,10 @@ router.get("/insert", (req, res) => {
     return res.redirect(`/users/login?fail=${message}`);
   }
 });
+
+router.get("/count", async (req, res) => {
+  const rows = await IOLIST.findAll();
+  return res.json({ count: rows.length });
+});
+
 export default router;

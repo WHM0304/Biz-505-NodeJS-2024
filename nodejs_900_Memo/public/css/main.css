@@ -49,11 +49,11 @@ div.list {
   width: 60%;
   margin: 10px auto;
   p {
+    margin-left: 1rem;
     display: inline-block;
     flex: 1;
     font-size: 1rem;
-    border: 1px solid black;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 1px 1px skyblue;
   }
 }
 form.form_box {

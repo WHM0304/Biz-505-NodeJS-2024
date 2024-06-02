@@ -1,4 +1,24 @@
 extends ../layout
 
 block content
-    h1 매입매출 등록화면
+    link(rel="stylesheet", href="/css/iolist.css")
+    form.iolist(method="POST")
+        fieldset
+            legend 매입매출
+            div 
+                label(for="io_seq") 상품코드 
+                input(type="text", name= "io_seq", id="io_seq")
+                
+            div 
+                label(for="io_div") 매입매출분류 
+                select(name="io_div")
+                    option(value="1") 매입  
+                    option(value="2") 매출
+            div 
+                label(for="io_quan") 갯수
+                input(type="number", name= "io_quan", id="io_quan")
+                label(for="io_price") 단가 
+                input(type="text", name= "io_price", id="io_price")
+            div.btn_box 
+                input(type="submit",value="저장")
+                input(type="reset",value="새로작성")

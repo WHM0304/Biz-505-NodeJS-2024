@@ -50,5 +50,12 @@ router.get("/:io_seq/delete", async (req, res) => {
   await row.save();
   return res.redirect("/iolist");
 });
+router.post("/insert", async (req, res) => {
+  let io_seq = req.body.io_seq;
+  let io_div = req.body.io_div;
+  let io_quan = req.body.io_quan;
+  let io_price = req.body.io_price;
+  console.log(io_seq, req.body.io_div);
+});
 
 export default router;

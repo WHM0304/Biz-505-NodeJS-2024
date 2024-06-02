@@ -1,6 +1,6 @@
 export default {
   development: {
-    username: "root",
+    username: "root2",
     password: "!Biz8080",
     database: "ecountdb",
     host: "127.0.0.1",
